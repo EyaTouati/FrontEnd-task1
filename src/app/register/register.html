@@ -1,0 +1,9 @@
+<form (ngSubmit)="onSubmit()">
+  <input class="form-control mb-2" type="text" [(ngModel)]="user.username" name="username" placeholder="Nom" required>
+  <input class="form-control mb-2" type="email" [(ngModel)]="user.email" name="email" placeholder="Email" required>
+  <input class="form-control mb-2" type="password" [(ngModel)]="user.password" name="password" placeholder="Mot de passe" required>
+  <button class="btn btn-primary" type="submit">Register</button>
+
+  <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>
+  <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+</form>
