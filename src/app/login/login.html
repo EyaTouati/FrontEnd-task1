@@ -1,38 +1,48 @@
 <div class="container vh-100 d-flex justify-content-center align-items-center">
   <div class="card p-4 shadow" style="width: 350px;">
-
     <h3 class="text-center mb-3">Login</h3>
 
-    <form (ngSubmit)="onSubmit()">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <!-- Email -->
       <input
         type="email"
-        class="form-control mb-2"
+        class="form-control mb-1"
         placeholder="Email"
         name="email"
         [(ngModel)]="credentials.email"
+        #email="ngModel"
         required
-      >
+        email
+      />
+      <small class="text-danger" *ngIf="f.submitted && email.invalid">
+        Email invalide
+      </small>
 
+      <!-- Password -->
       <input
         type="password"
-        class="form-control mb-3"
+        class="form-control mb-2"
         placeholder="Mot de passe"
         name="password"
         [(ngModel)]="credentials.password"
+        #password="ngModel"
         required
-      >
+      />
+      <small class="text-danger" *ngIf="f.submitted && password.invalid">
+        Mot de passe requis
+      </small>
 
-      <button class="btn btn-success w-100" type="submit">
-        Login
-      </button>
+      <!-- Bouton login -->
+      <button class="btn btn-success w-100 mt-2" type="submit">Login</button>
     </form>
 
+    <!-- Messages backend -->
+    <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+    <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>
+
     <p class="text-center mt-3 mb-0">
+      Pas de compte ?
       <a routerLink="/register">Créer un compte</a>
     </p>
-
-    <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>
-    <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
-
   </div>
 </div>

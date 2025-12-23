@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth';
 import { RouterModule } from '@angular/router'; 
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -14,22 +15,35 @@ export class LoginComponent {
   success = '';
   error = '';
 
-  constructor(private auth: AuthService) {}
+ constructor(private auth: AuthService, private router: Router) {}
 
-onSubmit() {
+onSubmit(form: any) {
+  // Validation frontend
+  if (form.invalid) {
+    this.error = 'Veuillez corriger les erreurs du formulaire';
+    this.success = '';
+    return; // stop l’envoi
+  }
+
+  // Appel backend
   this.auth.login(this.credentials).subscribe({
     next: (res: any) => {
-      this.auth.saveToken(res.token);  // stocke le JWT
-      this.success = 'Login OK !';
+      this.success = 'Connexion réussie';
       this.error = '';
-      this.credentials = { email: '', password: '' };
+      this.auth.saveToken(res.token); // sauvegarde JWT
+      form.resetForm();
+      this.router.navigate(['/watchlist']);
     },
     error: (err) => {
-      this.error = 'Email ou mot de passe incorrect';
+      if (err.status === 401) {
+        this.error = 'Email ou mot de passe incorrect';
+      } else {
+        this.error = err.error?.error || 'Erreur lors de la connexion';
+      }
       this.success = '';
-      this.credentials = { email: '', password: '' };
     }
   });
 }
+
 
 }

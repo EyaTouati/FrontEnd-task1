@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Votre Watchlist</h2>
+    <button class="btn btn-primary" (click)="toggleAddForm()">
+      {{ showAddForm ? 'Annuler' : 'Ajouter un film' }}
+    </button>
+  </div>
+
+  <!-- Formulaire Add Movies -->
+  <div *ngIf="showAddForm" class="card p-3 mb-3 shadow">
+    <input type="text" [(ngModel)]="newMovie.title" placeholder="Titre" class="form-control mb-2" name="title" required />
+    <input type="text" [(ngModel)]="newMovie.description" placeholder="Description" class="form-control mb-2" name="description" />
+    <input type="number" [(ngModel)]="newMovie.year" placeholder="Année" class="form-control mb-2" name="year" required />
+    <button class="btn btn-success w-100" (click)="addMovie()">Ajouter</button>
+
+    <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>
+    <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+  </div>
+
+  <!-- Liste des films -->
+  <ul class="list-group">
+    <li *ngFor="let movie of movies" class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <strong>{{ movie.title }}</strong> - {{ movie.description }} ({{ movie.year }})
+      </div>
+      <div>
+        <button class="btn btn-warning btn-sm me-2" (click)="editMovie(movie)">Modifier</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteMovie(movie._id)">Supprimer</button>
+      </div>
+    </li>
+  </ul>
+  <!-- Formulaire Edit Movies -->
+<div *ngIf="editMovieData" class="card p-3 mb-3 shadow">
+  <h5>Modifier le film</h5>
+  <input type="text" [(ngModel)]="editMovieData.title" placeholder="Titre" class="form-control mb-2" name="editTitle" required />
+  <input type="text" [(ngModel)]="editMovieData.description" placeholder="Description" class="form-control mb-2" name="editDescription" />
+  <input type="number" [(ngModel)]="editMovieData.year" placeholder="Année" class="form-control mb-2" name="editYear" required />
+
+  <div class="d-flex justify-content-between">
+    <button class="btn btn-success" (click)="updateMovie()">Sauvegarder</button>
+    <button class="btn btn-secondary" (click)="cancelEdit()">Annuler</button>
+  </div>
+
+  <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>
+  <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+</div>
+
+</div>

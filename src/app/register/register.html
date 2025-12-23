@@ -3,37 +3,76 @@
 
     <h3 class="text-center mb-3">Register</h3>
 
-    <form (ngSubmit)="onSubmit()">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+      <!-- USERNAME -->
       <input
-        class="form-control mb-2"
+        class="form-control mb-1"
         type="text"
-        [(ngModel)]="user.username"
         name="username"
+        [(ngModel)]="user.username"
         placeholder="Nom"
         required
+        minlength="3"
+        #username="ngModel"
       >
 
+      <small class="text-danger" *ngIf="f.submitted && username.invalid">
+        <span *ngIf="username.errors?.['required']">
+          Nom obligatoire
+        </span>
+        <span *ngIf="username.errors?.['minlength']">
+          Minimum 3 caractères
+        </span>
+      </small>
+
+      <!-- EMAIL -->
       <input
-        class="form-control mb-2"
+        class="form-control mb-1 mt-2"
         type="email"
-        [(ngModel)]="user.email"
         name="email"
+        [(ngModel)]="user.email"
         placeholder="Email"
         required
+        email
+        #email="ngModel"
       >
 
+      <small class="text-danger" *ngIf="f.submitted && email.invalid">
+        <span *ngIf="email.errors?.['required']">
+          Email obligatoire
+        </span>
+        <span *ngIf="email.errors?.['email']">
+          Format email invalide
+        </span>
+      </small>
+
+      <!-- PASSWORD -->
       <input
-        class="form-control mb-3"
+        class="form-control mb-1 mt-2"
         type="password"
-        [(ngModel)]="user.password"
         name="password"
+        [(ngModel)]="user.password"
         placeholder="Mot de passe"
         required
+        minlength="6"
+        #password="ngModel"
       >
 
-      <button class="btn btn-primary w-100" type="submit">
+      <small class="text-danger" *ngIf="f.submitted && password.invalid">
+        <span *ngIf="password.errors?.['required']">
+          Mot de passe obligatoire
+        </span>
+        <span *ngIf="password.errors?.['minlength']">
+          Minimum 6 caractères
+        </span>
+      </small>
+
+      <!-- BUTTON -->
+      <button class="btn btn-primary w-100 mt-3" type="submit">
         Register
       </button>
+
     </form>
 
     <p class="text-center mt-3 mb-0">
@@ -41,8 +80,14 @@
       <a routerLink="/login">Se connecter</a>
     </p>
 
-    <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>
-    <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+    <!-- BACKEND FEEDBACK -->
+    <div *ngIf="success" class="alert alert-success mt-2">
+      {{ success }}
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger mt-2">
+      {{ error }}
+    </div>
 
   </div>
 </div>
