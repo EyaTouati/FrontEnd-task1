@@ -1,8 +1,38 @@
-<form (ngSubmit)="onSubmit()">
-  <input class="form-control mb-2" type="email" [(ngModel)]="credentials.email" name="email" placeholder="Email" required>
-  <input class="form-control mb-2" type="password" [(ngModel)]="credentials.password" name="password" placeholder="Mot de passe" required>
-  <button class="btn btn-success" type="submit">Login</button>
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+  <div class="card p-4 shadow" style="width: 350px;">
 
-  <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>
-  <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
-</form>
+    <h3 class="text-center mb-3">Login</h3>
+
+    <form (ngSubmit)="onSubmit()">
+      <input
+        type="email"
+        class="form-control mb-2"
+        placeholder="Email"
+        name="email"
+        [(ngModel)]="credentials.email"
+        required
+      >
+
+      <input
+        type="password"
+        class="form-control mb-3"
+        placeholder="Mot de passe"
+        name="password"
+        [(ngModel)]="credentials.password"
+        required
+      >
+
+      <button class="btn btn-success w-100" type="submit">
+        Login
+      </button>
+    </form>
+
+    <p class="text-center mt-3 mb-0">
+      <a routerLink="/register">Créer un compte</a>
+    </p>
+
+    <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>
+    <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+
+  </div>
+</div>

@@ -1,10 +1,1 @@
-<div class="container mt-3">
-  <h1>Authentication App</h1>
-  <app-login></app-login>
-  <hr>
-  <app-register></app-register>
-
-  <button class="btn btn-warning mt-3" *ngIf="isBrowser() && auth.isAuthenticated()" (click)="auth.logout()">
-    Logout
-  </button>
-</div>
+<router-outlet></router-outlet>
