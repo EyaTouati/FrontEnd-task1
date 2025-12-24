@@ -14,7 +14,7 @@
         required
         email
       />
-      <small class="text-danger" *ngIf="f.submitted && email.invalid">
+      <small class="text-danger" *ngIf ="f.submitted && email.invalid">
         Email invalide
       </small>
 
@@ -35,7 +35,8 @@
       <!-- Bouton login -->
       <button class="btn btn-success w-100 mt-2" type="submit">Login</button>
     </form>
-
+     <br>
+<a routerLink="/forgot-password">Mot de passe oublié ?</a>
     <!-- Messages backend -->
     <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
     <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>

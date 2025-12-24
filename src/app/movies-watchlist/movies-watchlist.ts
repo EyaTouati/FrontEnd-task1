@@ -101,4 +101,10 @@ cancelEdit() {
       error: err => this.error = err.error?.error || 'Erreur lors de la suppression'
     });
   }
+
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 }

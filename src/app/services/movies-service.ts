@@ -9,9 +9,17 @@ export class MoviesService {
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
-  getMovies(): Observable<any> {
-    return this.http.get(this.baseUrl, { headers: { Authorization: `Bearer ${this.auth.getToken()}` } });
-  }
+ getMovies(): Observable<any> {
+  const token = this.auth.getToken();
+  console.log('TOKEN USED:', token);
+
+  return this.http.get(this.baseUrl, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+}
+
 
   addMovie(movie: any): Observable<any> {
     return this.http.post(this.baseUrl, movie, { headers: { Authorization: `Bearer ${this.auth.getToken()}` } });

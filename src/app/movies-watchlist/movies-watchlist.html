@@ -1,13 +1,13 @@
 <div class="container mt-4">
+  <!-- Navbar -->
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Votre Watchlist</h2>
-    <button class="btn btn-primary" (click)="toggleAddForm()">
+    <button class="btn btn-danger" (click)="logout()">Logout</button>
+       <button class="btn btn-primary" (click)="toggleAddForm()">
       {{ showAddForm ? 'Annuler' : 'Ajouter un film' }}
     </button>
   </div>
-
-  <!-- Formulaire Add Movies -->
-  <div *ngIf="showAddForm" class="card p-3 mb-3 shadow">
+<div *ngIf="showAddForm" class="card p-3 mb-3 shadow">
     <input type="text" [(ngModel)]="newMovie.title" placeholder="Titre" class="form-control mb-2" name="title" required />
     <input type="text" [(ngModel)]="newMovie.description" placeholder="Description" class="form-control mb-2" name="description" />
     <input type="number" [(ngModel)]="newMovie.year" placeholder="Année" class="form-control mb-2" name="year" required />
