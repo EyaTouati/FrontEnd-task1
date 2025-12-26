@@ -4,6 +4,10 @@ import { AuthService } from '../services/auth';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
+import { title } from 'process';
+
+
 
 @Component({
   selector: 'app-movies-watchlist',
@@ -12,7 +16,9 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './movies-watchlist.html'
 })
 export class MoviesWatchlist implements OnInit {
-  movies: any[] = [];
+  movies : any[] = [
+    
+  ];
   editMovieData: any = null; // null si aucun film en édition
   showAddForm = false; // <-- contrôle l'affichage du formulaire
   newMovie = { title: '', description: '', year: new Date().getFullYear() };
@@ -22,7 +28,8 @@ export class MoviesWatchlist implements OnInit {
   constructor(
     private moviesService: MoviesService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -33,9 +40,21 @@ export class MoviesWatchlist implements OnInit {
     }
   }
 
-  loadMovies() {
-    this.moviesService.getMovies().subscribe({
-      next: res => this.movies = res,
+   loadMovies() {
+    
+     this.moviesService.getMovies().subscribe({
+      
+
+      next: res =>{
+         
+        console.log(typeof(this.movies));
+         if (Array.isArray(res)) {
+        this.movies = res ;}
+        this.cdr.detectChanges();
+        console.log(this.movies);
+      },
+         
+     
       error: err => this.error = err.error?.error || 'Erreur lors du chargement'
     });
   }

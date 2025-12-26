@@ -7,15 +7,7 @@
       {{ showAddForm ? 'Annuler' : 'Ajouter un film' }}
     </button>
   </div>
-<div *ngIf="showAddForm" class="card p-3 mb-3 shadow">
-    <input type="text" [(ngModel)]="newMovie.title" placeholder="Titre" class="form-control mb-2" name="title" required />
-    <input type="text" [(ngModel)]="newMovie.description" placeholder="Description" class="form-control mb-2" name="description" />
-    <input type="number" [(ngModel)]="newMovie.year" placeholder="Année" class="form-control mb-2" name="year" required />
-    <button class="btn btn-success w-100" (click)="addMovie()">Ajouter</button>
 
-    <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>
-    <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
-  </div>
 
   <!-- Liste des films -->
   <ul class="list-group">
@@ -29,6 +21,15 @@
       </div>
     </li>
   </ul>
+  <div *ngIf="showAddForm" class="card p-3 mb-3 shadow">
+    <input type="text" [(ngModel)]="newMovie.title" placeholder="Titre" class="form-control mb-2" name="title" required />
+    <input type="text" [(ngModel)]="newMovie.description" placeholder="Description" class="form-control mb-2" name="description" />
+    <input type="number" [(ngModel)]="newMovie.year" placeholder="Année" class="form-control mb-2" name="year" required />
+    <button class="btn btn-success w-100" (click)="addMovie()">Ajouter</button>
+
+    <div *ngIf="success" class="alert alert-success mt-2">{{ success }}</div>
+    <div *ngIf="error" class="alert alert-danger mt-2">{{ error }}</div>
+  </div>
   <!-- Formulaire Edit Movies -->
 <div *ngIf="editMovieData" class="card p-3 mb-3 shadow">
   <h5>Modifier le film</h5>
